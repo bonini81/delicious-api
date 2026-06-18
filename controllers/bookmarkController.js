@@ -11,11 +11,11 @@ exports.getAll = async (req, res) => {
 
 exports.create = async (req, res) => {
   try {
-    const { url, title, description, tags } = req.body;
+    const { url, title, description, tags, category } = req.body;
     if (!url || !title)
       return res.status(400).json({ message: 'URL and title required' });
 
-    const bookmark = await Bookmark.create({ user: req.user.id, url, title, description, tags });
+    const bookmark = await Bookmark.create({ user: req.user.id, url, title, description, tags, category });
     res.status(201).json(bookmark);
   } catch {
     res.status(500).json({ message: 'Server error' });
